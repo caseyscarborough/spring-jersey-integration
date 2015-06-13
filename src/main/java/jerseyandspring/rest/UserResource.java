@@ -28,6 +28,7 @@ public class UserResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public Response create(UserDTO userDTO) {
+    userDAO.save(userDTO);
     return Response.status(201).entity(userDTO).build();
   }
 }

@@ -39,6 +39,10 @@ public class UserResourceTest extends JerseyTest {
     Response r = target().path("users").request().post(Entity.entity(testUserDTO, MediaType.APPLICATION_JSON));
     assertEquals(r.getStatus(), 201);
     assertEquals(r.readEntity(UserDTO.class).toString(), testUserDTO.toString());
+
+    r = target().path("users").request().get(Response.class);
+    List users = r.readEntity(List.class);
+    assertEquals(users.size(), 3);
   }
 
 }
