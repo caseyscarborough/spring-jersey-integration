@@ -1,13 +1,15 @@
 package jerseyandspring.dto;
 
-public class UserDTO {
+import java.io.Serializable;
+
+public class UserDTO implements Serializable {
 
   private String firstName;
-  private String lastName;
 
-  public UserDTO(String firstName, String lastName) {
+  public UserDTO() {}
+
+  public UserDTO(String firstName) {
     this.firstName = firstName;
-    this.lastName = lastName;
   }
 
   public String getFirstName() {
@@ -18,11 +20,22 @@ public class UserDTO {
     this.firstName = firstName;
   }
 
-  public String getLastName() {
-    return lastName;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    UserDTO userDTO = (UserDTO) o;
+
+    if (firstName != null ? !firstName.equals(userDTO.firstName) : userDTO.firstName != null) return false;
+
+    return true;
   }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
+  @Override
+  public int hashCode() {
+    int result = firstName != null ? firstName.hashCode() : 0;
+    result = 31 * result;
+    return result;
   }
 }

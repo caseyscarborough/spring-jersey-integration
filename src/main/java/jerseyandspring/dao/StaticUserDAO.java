@@ -10,8 +10,8 @@ public class StaticUserDAO implements UserDAO {
   @Override
   public List<UserDTO> getAllUsers() {
     List<UserDTO> users = new ArrayList<UserDTO>();
-    users.add(new UserDTO("John", "Doe"));
-    users.add(new UserDTO("Jane", "Doe"));
+    users.add(new UserDTO("John"));
+    users.add(new UserDTO("Jane"));
     return users;
   }
 }
