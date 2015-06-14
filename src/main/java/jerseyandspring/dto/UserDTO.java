@@ -2,14 +2,16 @@ package jerseyandspring.dto;
 
 import java.io.Serializable;
 
-public class UserDTO implements Serializable {
+public class UserDto implements Serializable {
+
+  private static final long serialVersionUID = -4733194550960772819L;
 
   private String firstName;
   private String lastName;
 
-  public UserDTO() {}
+  public UserDto() {}
 
-  public UserDTO(String firstName, String lastName) {
+  public UserDto(String firstName, String lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
   }
@@ -35,10 +37,10 @@ public class UserDTO implements Serializable {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    UserDTO userDTO = (UserDTO) o;
+    UserDto userDto = (UserDto) o;
 
-    if (firstName != null ? !firstName.equals(userDTO.firstName) : userDTO.firstName != null) return false;
-    if (lastName != null ? !lastName.equals(userDTO.lastName) : userDTO.lastName != null) return false;
+    if (firstName != null ? !firstName.equals(userDto.firstName) : userDto.firstName != null) return false;
+    if (lastName != null ? !lastName.equals(userDto.lastName) : userDto.lastName != null) return false;
 
     return true;
   }

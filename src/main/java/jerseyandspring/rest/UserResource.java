@@ -1,9 +1,9 @@
 package jerseyandspring.rest;
 
-import jerseyandspring.dao.UserDAO;
-import jerseyandspring.dto.UserDTO;
+import jerseyandspring.dao.UserDao;
+import jerseyandspring.dao.UserDaoFactory;
+import jerseyandspring.dto.UserDto;
 
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -11,24 +11,28 @@ import javax.ws.rs.core.Response;
 @Path("users")
 public class UserResource {
 
-  private UserDAO userDAO;
+  private UserDao userDao;
 
-  @Inject
-  public UserResource(UserDAO userDAO) {
-    this.userDAO = userDAO;
+  public UserResource() {
+    System.out.println("Creating new UserDao Instance from UserDaoFactory");
+    this.userDao = UserDaoFactory.getInstance();
+  }
+
+  public UserResource(UserDao userDao) {
+    this.userDao = userDao;
   }
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Response list() {
-    return Response.status(200).entity(userDAO.getAllUsers()).build();
+    return Response.status(200).entity(userDao.getAllUsers()).build();
   }
 
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response create(UserDTO userDTO) {
-    userDAO.save(userDTO);
-    return Response.status(201).entity(userDTO).build();
+  public Response create(UserDto userDto) {
+    userDao.save(userDto);
+    return Response.status(201).entity(userDto).build();
   }
 }

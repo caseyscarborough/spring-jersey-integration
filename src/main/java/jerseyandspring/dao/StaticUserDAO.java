@@ -1,27 +1,27 @@
 package jerseyandspring.dao;
 
-import jerseyandspring.dto.UserDTO;
+import jerseyandspring.dto.UserDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaticUserDAO implements UserDAO {
+public class StaticUserDao implements UserDao {
 
-  List<UserDTO> users = new ArrayList<UserDTO>();
+  private List<UserDto> users = new ArrayList<UserDto>();
 
-  public StaticUserDAO() {
-    users.add(new UserDTO("John", "Doe"));
-    users.add(new UserDTO("Jane", "Doe"));
+  public StaticUserDao() {
+    users.add(new UserDto("John", "Doe"));
+    users.add(new UserDto("Jane", "Doe"));
   }
 
   @Override
-  public List<UserDTO> getAllUsers() {
+  public List<UserDto> getAllUsers() {
     return users;
   }
 
   @Override
-  public UserDTO save(UserDTO userDTO) {
-    users.add(userDTO);
-    return userDTO;
+  public UserDto save(UserDto userDto) {
+    users.add(userDto);
+    return userDto;
   }
 }
