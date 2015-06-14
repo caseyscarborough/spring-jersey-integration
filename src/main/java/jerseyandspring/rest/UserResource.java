@@ -28,11 +28,7 @@ public class UserResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public Response create(UserDTO userDTO) {
-    try {
-      return Response.status(201).entity(userDTO).build();
-    } catch (Exception e) {
-      System.out.println(e);
-    }
-    return Response.status(403).build();
+    userDAO.save(userDTO);
+    return Response.status(201).entity(userDTO).build();
   }
 }

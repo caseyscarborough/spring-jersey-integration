@@ -5,11 +5,13 @@ import java.io.Serializable;
 public class UserDTO implements Serializable {
 
   private String firstName;
+  private String lastName;
 
   public UserDTO() {}
 
-  public UserDTO(String firstName) {
+  public UserDTO(String firstName, String lastName) {
     this.firstName = firstName;
+    this.lastName = lastName;
   }
 
   public String getFirstName() {
@@ -20,6 +22,14 @@ public class UserDTO implements Serializable {
     this.firstName = firstName;
   }
 
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -28,6 +38,7 @@ public class UserDTO implements Serializable {
     UserDTO userDTO = (UserDTO) o;
 
     if (firstName != null ? !firstName.equals(userDTO.firstName) : userDTO.firstName != null) return false;
+    if (lastName != null ? !lastName.equals(userDTO.lastName) : userDTO.lastName != null) return false;
 
     return true;
   }
@@ -35,7 +46,15 @@ public class UserDTO implements Serializable {
   @Override
   public int hashCode() {
     int result = firstName != null ? firstName.hashCode() : 0;
-    result = 31 * result;
+    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     return result;
+  }
+
+  @Override
+  public String toString() {
+    return "UserDTO{" +
+        "firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        '}';
   }
 }
