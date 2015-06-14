@@ -1,7 +1,8 @@
 package jerseyandspring.rest;
 
-import jerseyandspring.RestApplication;
-import jerseyandspring.dto.UserDTO;
+import jerseyandspring.dao.UserDao;
+import jerseyandspring.dto.UserDto;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 
@@ -17,9 +18,14 @@ import static org.junit.Assert.assertEquals;
 
 public class UserResourceTest extends JerseyTest {
 
+  private UserDao userDao;
+  private UserResource userResource;
+
   @Override
   protected Application configure() {
-    return new RestApplication();
+    ResourceConfig config = new ResourceConfig();
+    config.registerInstances(userResource);
+    return config;
   }
 
   @Override
@@ -30,19 +36,15 @@ public class UserResourceTest extends JerseyTest {
   @Test
   public void testClientStringResponse() {
     Response s = target().path("users").request().get(Response.class);
-    assertEquals(s.readEntity(List.class).size(), 2);
+    assertEquals(s.readEntity(List.class).size(), 3);
   }
 
   @Test
   public void testCreateUser() {
-    UserDTO testUserDTO = new UserDTO("Test", "User");
-    Response r = target().path("users").request().post(Entity.entity(testUserDTO, MediaType.APPLICATION_JSON));
+    UserDto testUserDto = new UserDto("Test", "User");
+    Response r = target().path("users").request().post(Entity.entity(testUserDto, MediaType.APPLICATION_JSON));
     assertEquals(r.getStatus(), 201);
-    assertEquals(r.readEntity(UserDTO.class).toString(), testUserDTO.toString());
-
-    r = target().path("users").request().get(Response.class);
-    List users = r.readEntity(List.class);
-    assertEquals(users.size(), 3);
+    assertEquals(r.readEntity(UserDto.class).toString(), testUserDto.toString());
   }
 
 }

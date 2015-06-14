@@ -1,12 +1,12 @@
 package jerseyandspring.dao;
 
-import jerseyandspring.dto.UserDTO;
+import jerseyandspring.dto.UserDto;
 
 import java.util.List;
 
-public interface UserDAO {
+public interface UserDao {
 
-  List<UserDTO> getAllUsers();
+  List<UserDto> getAllUsers();
 
-  UserDTO save(UserDTO userDTO);
+  UserDto save(UserDto userDto);
 }

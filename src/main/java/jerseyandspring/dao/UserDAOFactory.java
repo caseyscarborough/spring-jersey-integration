@@ -2,15 +2,15 @@ package jerseyandspring.dao;
 
 // This class would be used to retrieve a
 // UserDAO implementation if not using Spring
-public class UserDAOFactory {
+public class UserDaoFactory {
 
-  private static UserDAO instance;
+  private static UserDao instance;
 
-  public static void setInstance(UserDAO userDAO) {
-    instance = userDAO;
+  public static void setInstance(UserDao userDao) {
+    instance = userDao;
   }
 
-  public static UserDAO getInstance() {
-    return new StaticUserDAO();
+  public static UserDao getInstance() {
+    return new StaticUserDao();
   }
 }
