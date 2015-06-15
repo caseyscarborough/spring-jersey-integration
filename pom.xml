@@ -7,10 +7,11 @@
   <groupId>jerseyandspring</groupId>
   <artifactId>jerseyandspring</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
 
   <properties>
     <javax.inject.version>1</javax.inject.version>
-    <jersey.version>2.18</jersey.version>
+    <jersey.version>2.6</jersey.version>
     <junit.version>4.12</junit.version>
     <mockito.version>1.10.19</mockito.version>
   </properties>
@@ -24,22 +25,15 @@
     </dependency>
 
     <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet</artifactId>
+      <version>${jersey.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-json-jackson</artifactId>
       <version>${jersey.version}</version>
-      <scope>runtime</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>javax.inject</groupId>
-      <artifactId>javax.inject</artifactId>
-      <version>${javax.inject.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
     </dependency>
 
     <dependency>
@@ -55,6 +49,20 @@
       <version>${jersey.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>${javax.inject.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+    </dependency>
+
+
 
     <dependency>
       <groupId>org.mockito</groupId>
