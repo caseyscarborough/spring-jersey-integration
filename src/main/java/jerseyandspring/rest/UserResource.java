@@ -1,7 +1,6 @@
 package jerseyandspring.rest;
 
 import jerseyandspring.dao.UserDao;
-import jerseyandspring.dao.UserDaoFactory;
 import jerseyandspring.dto.UserDto;
 
 import javax.ws.rs.*;
@@ -12,11 +11,6 @@ import javax.ws.rs.core.Response;
 public class UserResource {
 
   private UserDao userDao;
-
-  public UserResource() {
-    System.out.println("Creating new UserDao Instance from UserDaoFactory");
-    this.userDao = UserDaoFactory.getInstance();
-  }
 
   public UserResource(UserDao userDao) {
     this.userDao = userDao;

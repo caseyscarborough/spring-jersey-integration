@@ -4,7 +4,14 @@ package jerseyandspring.dao;
 // UserDAO implementation if not using Spring
 public class UserDaoFactory {
 
- public static UserDao getInstance() {
-   return new StaticUserDao();
- }
+  public UserDao getInstance() {
+    return new StaticUserDao();
+  }
+
+  public UserDao getInstance(String type) {
+    if (type.equals("static")) {
+      return new StaticUserDao();
+    }
+    return null;
+  }
 }

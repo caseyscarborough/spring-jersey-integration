@@ -9,7 +9,8 @@ public class UserDto implements Serializable {
   private String firstName;
   private String lastName;
 
-  public UserDto() {}
+  public UserDto() {
+  }
 
   public UserDto(String firstName, String lastName) {
     this.firstName = firstName;
