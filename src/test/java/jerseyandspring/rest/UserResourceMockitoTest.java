@@ -2,9 +2,15 @@ package jerseyandspring.rest;
 
 import jerseyandspring.dao.UserDao;
 import jerseyandspring.dto.UserDto;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
@@ -16,22 +22,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class UserResourceMockitoTest extends JerseyTest {
 
+  @Mock
   private UserDao userDao;
+
+  @InjectMocks
   private UserResource userResource;
 
   @Override
   protected Application configure() {
-    userDao = mock(UserDao.class);
-    userResource = new UserResource(userDao);
+    MockitoAnnotations.initMocks(this);
 
-    ResourceConfig config = new ResourceConfig();
-    config.registerInstances(userResource);
-    return config;
+    return new ResourceConfig()
+        .register(userResource)
+        .register(JacksonFeature.class);
+  }
+
+  @Override
+  protected void configureClient(ClientConfig config) {
+    config.register(JacksonJsonProvider.class);
   }
 
   @Override

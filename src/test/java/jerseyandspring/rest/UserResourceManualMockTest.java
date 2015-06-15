@@ -2,6 +2,9 @@ package jerseyandspring.rest;
 
 import jerseyandspring.dao.UserDao;
 import jerseyandspring.dto.UserDto;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
@@ -36,9 +39,15 @@ public class UserResourceManualMockTest extends JerseyTest {
   protected Application configure() {
     UserDao userDao = new MockUserDao();
     UserResource userResource = new UserResource(userDao);
-    ResourceConfig config = new ResourceConfig();
-    config.registerInstances(userResource);
-    return config;
+
+    return new ResourceConfig()
+        .register(userResource)
+        .register(JacksonFeature.class);
+  }
+
+  @Override
+  protected void configureClient(ClientConfig config) {
+    config.register(JacksonJsonProvider.class);
   }
 
   @Override
